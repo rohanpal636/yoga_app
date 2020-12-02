@@ -142,7 +142,7 @@ class _LogInState extends State<LogIn> {
                                         msg: "LOGIN Successful!!!",
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.CENTER,
-                                        backgroundColor: Colors.green[400],
+                                        backgroundColor: Colors.green[500],
                                         textColor: Colors.white,
                                         timeInSecForIos: 1
                                     );
