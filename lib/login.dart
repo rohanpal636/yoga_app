@@ -135,14 +135,13 @@ class _LogInState extends State<LogIn> {
                                   try {
                                     final user = await _auth.signInWithEmailAndPassword(email: _email, password: _password);
                                     if (user!=null) {
-                                      Navigator.pushAndRemoveUntil(context, HomePage(), (route) => false)
-                                      //Navigator.push(context, MaterialPageRoute(builder: (context) =>HomePage()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) =>HomePage()));
                                     }
                                     Fluttertoast.showToast(
                                         msg: "LOGIN Successful!!!",
                                         toastLength: Toast.LENGTH_SHORT,
                                         gravity: ToastGravity.CENTER,
-                                        backgroundColor: Colors.green[500],
+                                        backgroundColor: Colors.green[400],
                                         textColor: Colors.white,
                                         timeInSecForIos: 1
                                     );
