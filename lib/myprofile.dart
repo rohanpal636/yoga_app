@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yoga_app/main.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -7,6 +11,22 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+  User user;
+  Future<void> getUserData() {
+    User userData = FirebaseAuth.instance.currentUser;
+    setState(() {
+      user = userData;
+      print(userData.uid);
+      print(userData.email);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,39 +44,99 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
         body: SafeArea(
-          child: SizedBox.expand(
-            child: Column(
-              children: <Widget>[
-
-                const SizedBox(height: 36.0),
-                const SizedBox(height: 16.0),
-                RaisedButton(
-                  onPressed: (){ return showDialog(
-                  context: context,
-                  builder: (context) => new AlertDialog(
-                    title: new Text('Are you sure?'),
-                    content: new Text('Do you want to Log Out?     '),
-                    actions: <Widget>[
-                      new GestureDetector(
-                        onTap: () => Navigator.of(context).pop(false),
-                        child: Text("NO"),
-                      ),
-                      SizedBox(height: 16),
-                      new GestureDetector(
-                        onTap: () =>  Navigator.pop(
-                    context,
-                    MaterialPageRoute(builder: (context) => YogaApp()),
-                    ),
-                        child: Text("YES"),
-                      ),
-                    ],
+          child: Container(
+            //constraints: BoxConstraints.expand(width: 395.0, height: 395.0),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("android/assets/homepage.jpg"),
+                    fit: BoxFit.cover)),
+            child: SizedBox.expand(
+              child: Column(
+                children: <Widget>[
+                  (user != null)
+                      ? FutureBuilder<DocumentSnapshot>(
+                          future: FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(user.uid)
+                              .get(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<DocumentSnapshot> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot == null) {
+                                return FlatButton(
+                                    onPressed: () {}, child: Text('no data'));
+                              }
+                              Map<String, dynamic> data = snapshot.data.data();
+                              return Column(children: [
+                                Text(
+                                  'Welcome' +
+                                      ' ' +
+                                      data['firstname'] +
+                                      ' ' +
+                                      data['lastname'],
+                                  style: TextStyle(
+                                      fontSize: 20.0, color: Colors.amber),
+                                ),
+                                Text(
+                                  'Your Email Id is ${user.email}',
+                                  style: TextStyle(
+                                      fontSize: 15.0, color: Colors.green),
+                                ),
+                              ]);
+                            } else {
+                              return FlatButton(
+                                  onPressed: () {}, child: Text('loading'));
+                            }
+                          })
+                      : Text(''),
+                  const SizedBox(height: 36.0),
+                  const SizedBox(height: 16.0),
+                  RaisedButton(
+                    onPressed: () {
+                      FirebaseAuth.instance.signOut();
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => YogaApp()),
+                          (Route<dynamic> route) => false);
+                      /* return showDialog(
+                          context: context,
+                          builder: (context) => new AlertDialog(
+                            title: new Text('Are you sure?',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 26.0,
+                                    fontWeight: FontWeight.bold)),
+                            content: new Text('Do you want to Log Out?',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 17.5,
+                                )),
+                            actions: <Widget>[
+                              new GestureDetector(
+                                  onTap: () {},
+                                  child: Text("NO",
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 19.0,
+                                          fontWeight: FontWeight.bold))),
+                              SizedBox(height: 16),
+                              new GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Text("YES",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 19.0,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ],
+                          ),
+                        ) ??
+                        false;*/
+                    },
+                    child: const Text('LOGOUT'),
                   ),
-                ) ??
-                    false;
-               },
-              child: const Text('LOGOUT'),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
