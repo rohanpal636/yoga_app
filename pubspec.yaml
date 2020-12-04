@@ -70,6 +70,14 @@ flutter:
     - android/assets/pose/child.png
     - android/assets/pose/triangle.png
     - android/assets/yoga1.png
+    - android/assets/slide/slide1.jpg
+    - android/assets/slide/slide2.jpeg
+    - android/assets/slide/slide3.jpg
+    - android/assets/slide/slide4.png
+    - android/assets/slide/homepage.jpg
+    - android/assets/slide/homepage1.jpg
+    - android/assets/slide/homepage2.jpg
+    - android/assets/slide/homepage4.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
