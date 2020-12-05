@@ -44,6 +44,7 @@ class _YogaAppState extends State<YogaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Builder(
         builder: (context) => Stack(children: [
           Container(
