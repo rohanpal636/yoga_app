@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:circular_menu/circular_menu.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:yoga_app/myprofile.dart';
 import 'package:yoga_app/notification.dart';
 
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             // constraints: BoxConstraints.expand(width: 500.0, height: 1200.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('android/assets/slide/homepage4.jpg'),
+                image: AssetImage('assets/slide/homepage4.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'android/assets/logo1.png',
+                    'assets/logo1.png',
                     fit: BoxFit.contain,
                     height: 80,
                   ),
@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/child.png'),
+                            Image.asset('assets/pose/child.png'),
                             Text(
                               'CHILD POSE',
                               style: TextStyle(
@@ -209,13 +209,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/plank.png'),
+                            Image.asset('assets/pose/plank.png'),
                             Text(
                               'PLANK POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.redAccent,
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -247,13 +247,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/tree.png'),
+                            Image.asset('assets/pose/tree.png'),
                             Text(
                               'TREE POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.green,
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -285,13 +285,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/cobra.png'),
+                            Image.asset('assets/pose/cobra.png'),
                             Text(
                               'COBRA POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.amber,
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -323,13 +323,13 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/triangle.png'),
+                            Image.asset('assets/pose/triangle.png'),
                             Text(
                               'TRIANGLE POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.blueGrey[50],
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -380,7 +380,7 @@ class Item1 extends StatelessWidget {
   const Item1({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide1.jpg');
+    return Image.asset('assets/slide/slide1.jpg');
   }
 }
 
@@ -388,7 +388,7 @@ class Item2 extends StatelessWidget {
   const Item2({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide2.jpeg');
+    return Image.asset('assets/slide/slide2.jpeg');
   }
 }
 
@@ -397,7 +397,7 @@ class Item3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide3.jpg');
+    return Image.asset('assets/slide/slide3.jpg');
   }
 }
 
@@ -406,6 +406,6 @@ class Item4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide4.png');
+    return Image.asset('assets/slide/slide4.png');
   }
 }

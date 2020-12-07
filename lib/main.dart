@@ -6,8 +6,8 @@ import 'package:circular_menu/circular_menu.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:yoga_app/homepage.dart';
-import 'package:yoga_app/registration.dart';
-import 'package:yoga_app/login.dart';
+import 'package:yoga_app/auth/registration.dart';
+import 'package:yoga_app/auth/login.dart';
 import 'package:yoga_app/yoga class.dart';
 import 'about us.dart';
 
@@ -51,7 +51,7 @@ class _YogaAppState extends State<YogaApp> {
             constraints: BoxConstraints.expand(width: 500.0, height: 1200.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('android/assets/slide/homepage4.jpg'),
+                image: AssetImage('assets/slide/homepage4.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -64,7 +64,7 @@ class _YogaAppState extends State<YogaApp> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'android/assets/logo1.png',
+                    'assets/logo1.png',
                     fit: BoxFit.contain,
                     height: 80,
                   ),
@@ -183,7 +183,7 @@ class _YogaAppState extends State<YogaApp> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/child.png'),
+                            Image.asset('assets/pose/child.png'),
                             Text(
                               'CHILD POSE',
                               style: TextStyle(
@@ -221,13 +221,13 @@ class _YogaAppState extends State<YogaApp> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/plank.png'),
+                            Image.asset('assets/pose/plank.png'),
                             Text(
                               'PLANK POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.red,
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -259,13 +259,13 @@ class _YogaAppState extends State<YogaApp> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/tree.png'),
+                            Image.asset('assets/pose/tree.png'),
                             Text(
                               'TREE POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.green,
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -297,13 +297,13 @@ class _YogaAppState extends State<YogaApp> {
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/cobra.png'),
+                            Image.asset('assets/pose/cobra.png'),
                             Text(
                               'COBRA POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.amber,
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -332,16 +332,17 @@ class _YogaAppState extends State<YogaApp> {
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Lato',
+                                  color: Colors.yellowAccent,
                                 ),
                               ),
                             ),
-                            Image.asset('android/assets/pose/triangle.png'),
+                            Image.asset('assets/pose/triangle.png'),
                             Text(
                               'TRIANGLE POSE',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.blueGrey[50],
+                                color: Colors.white,
                                 shadows: [
                                   Shadow(
                                       // bottomLeft
@@ -392,7 +393,7 @@ class Item1 extends StatelessWidget {
   const Item1({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide1.jpg');
+    return Image.asset('assets/slide/slide1.jpg');
   }
 }
 
@@ -400,7 +401,7 @@ class Item2 extends StatelessWidget {
   const Item2({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide2.jpeg');
+    return Image.asset('assets/slide/slide2.jpeg');
   }
 }
 
@@ -409,7 +410,7 @@ class Item3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide3.jpg');
+    return Image.asset('assets/slide/slide3.jpg');
   }
 }
 
@@ -418,6 +419,6 @@ class Item4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset('android/assets/slide/slide4.png');
+    return Image.asset('assets/slide/slide4.png');
   }
 }
