@@ -28,15 +28,29 @@ class _NotificationsState extends State<Notifications> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: new Text(
-            "NOTIFICATIONS",
-            style: new TextStyle(color: Colors.white),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset(
+                  "assets/logo1.png",
+                  fit: BoxFit.contain,
+                  height: 80,
+                ),
+              ),
+            ],
           ),
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+          leading: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: new Text(
+              "REGISTRATION",
+              style: new TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+              ),
+            ),
           ),
         ),
         body: SingleChildScrollView(

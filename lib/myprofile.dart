@@ -48,7 +48,7 @@ class _MyProfileState extends State<MyProfile> {
             //constraints: BoxConstraints.expand(width: 395.0, height: 395.0),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("android/assets/homepage.jpg"),
+                    image: AssetImage("assets/homepage.jpg"),
                     fit: BoxFit.cover)),
             child: SizedBox.expand(
               child: Column(

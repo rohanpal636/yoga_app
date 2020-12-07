@@ -56,28 +56,28 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - android/assets/downloadx.jpg
-    - android/assets/logo.png
-    - android/assets/logo1.png
-    - android/assets/login.jpeg
-    - android/assets/registration.jpeg
-    - android/assets/login.png
-    - android/assets/registration.png
-    - android/assets/homepage.jpg
-    - android/assets/pose/plank.png
-    - android/assets/pose/cobra.png
-    - android/assets/pose/tree.png
-    - android/assets/pose/child.png
-    - android/assets/pose/triangle.png
-    - android/assets/yoga1.png
-    - android/assets/slide/slide1.jpg
-    - android/assets/slide/slide2.jpeg
-    - android/assets/slide/slide3.jpg
-    - android/assets/slide/slide4.png
-    - android/assets/slide/homepage.jpg
-    - android/assets/slide/homepage1.jpg
-    - android/assets/slide/homepage2.jpg
-    - android/assets/slide/homepage4.jpg
+    - assets/downloadx.jpg
+    - assets/logo.png
+    - assets/logo1.png
+    - assets/login.jpeg
+    - assets/registration.jpeg
+    - assets/login.png
+    - assets/registration.png
+    - assets/homepage.jpg
+    - assets/pose/plank.png
+    - assets/pose/cobra.png
+    - assets/pose/tree.png
+    - assets/pose/child.png
+    - assets/pose/triangle.png
+    - assets/yoga1.png
+    - assets/slide/slide1.jpg
+    - assets/slide/slide2.jpeg
+    - assets/slide/slide3.jpg
+    - assets/slide/slide4.png
+    - assets/slide/homepage.jpg
+    - assets/slide/homepage1.jpg
+    - assets/slide/homepage2.jpg
+    - assets/slide/homepage4.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -92,7 +92,7 @@ flutter:
   fonts:
     - family: Lato
       fonts:
-        - asset: android\fonts\Lato-BoldItalic.ttf
+        - asset: fonts\Lato-BoldItalic.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
