@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:yoga_app/auth/registration.dart';
 
-import 'package:yoga_app/homepage.dart';
+import 'package:yoga_app/pages/homepage.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -30,121 +30,140 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/login.png'),
-            fit: BoxFit.cover,
-          ),
+    var scaffold = Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple[200],
+        title: new Text(
+          "LOG IN",
+          style: new TextStyle(color: Colors.white),
+        ),
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
-      Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  "assets/logo1.png",
-                  fit: BoxFit.contain,
-                  height: 80,
-                ),
-              ),
-            ],
-          ),
-          // new Text(
-          //   "LOG IN",
-          //   style: new TextStyle(color: Colors.white),
-          // ),
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
-        body: SingleChildScrollView(
-          /* child: Container(
+      // appBar:AppBar(
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.end,
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: Image.asset(
+      //           "assets/logo1.png",
+      //           fit: BoxFit.contain,
+      //           height: 80,
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      //   new Text(
+      //     "LOG IN",
+      //     style: new TextStyle(color: Colors.deepPurple[200]),
+      //   ),
+      //   leading: new IconButton(
+      //     icon: new Icon(Icons.arrow_back),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      // ),
+      body: SingleChildScrollView(
+        /* child: Container(
               constraints: BoxConstraints.expand(width: 400.0, height: 780.0),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("android/assets/login.png"),
                       fit: BoxFit.cover)),*/
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 150,
-                child: Image(
-                  image: AssetImage("assets/yoga1.png"),
-                  fit: BoxFit.contain,
-                ),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 150,
+              child: Image(
+                image: AssetImage("assets/yoga1.png"),
+                fit: BoxFit.contain,
               ),
-              Container(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          onChanged: (value) {
-                            if (emailValid(value)) {
-                              setState(() {
-                                vis2 = false;
-                                _email = value;
-                              });
-                            } else {
-                              setState(() {
-                                vis2 = true;
-                              });
-                            }
-                          }, //onChanged
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(
-                                Icons.email,
-                                color: Colors.lightBlueAccent,
-                              ),
-                              fillColor: Colors.white70,
-                              //  filled: true,
-                              labelText: 'E-mail',
-                              labelStyle: TextStyle(color: Colors.blue)),
+            ),
+            Container(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        validator: (email) {
+                          if (email == null || email.isEmpty) {
+                            return 'Please Enter Email Address';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          if (emailValid(value)) {
+                            setState(() {
+                              vis2 = false;
+                              _email = value;
+                            });
+                          } else {
+                            setState(() {
+                              vis2 = true;
+                            });
+                          }
+                        }, //onChanged
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.email,
+                              color: Colors.deepPurple,
+                            ),
+                            fillColor: Colors.white70,
+                            //  filled: true,
+                            labelText: 'E-mail',
+                            labelStyle: TextStyle(color: Colors.deepPurple)),
+                      ),
+                    ),
+                    Visibility(
+                      visible: vis2,
+                      child: Text(
+                        'please enter a valid email address',
+                        style: TextStyle(
+                          color: Colors.redAccent,
                         ),
                       ),
-                      Visibility(
-                        visible: vis2,
-                        child: Text(
-                          'please enter a valid email address',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: TextFormField(
-                          obscureText: true,
-                          onChanged: (value) {
-                            _password = value;
-                          }, //onChanged
-                          keyboardType: TextInputType.text,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        obscureText: true,
+                        validator: (_password) {
+                          if (_password == null || _password.isEmpty) {
+                            return 'Please Enter Password';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter password';
+                          }
+                          _password = value;
+                        }, //onChanged
+                        keyboardType: TextInputType.text,
 
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.lightBlueAccent,
-                              ),
-                              fillColor: Colors.white70,
-                              //filled: true,
-                              labelText: 'Password',
-                              labelStyle: TextStyle(color: Colors.blue)),
-                        ),
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.deepPurple,
+                            ),
+                            fillColor: Colors.white70,
+                            //filled: true,
+                            labelText: 'Password',
+                            labelStyle: TextStyle(color: Colors.deepPurple)),
                       ),
+                    ),
 
-                      /* if (passwordValid(value)) {
+                    /* if (passwordValid(value)) {
                                   setState(() {
                                     vis2 = false;
                                     _password = value;
@@ -174,119 +193,128 @@ class _LogInState extends State<LogIn> {
                               ),
                             ),
                           ),*/
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: () {},
-                            child: Text("Forgot Password"),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                            child: RaisedButton(
-                              elevation: 5.0,
-                              onPressed: () async {
-                                try {
-                                  final user =
-                                      await _auth.signInWithEmailAndPassword(
-                                          email: _email, password: _password);
-                                  if (user != null) {
-                                    // SharedPreferences preferences =
-                                    //    await SharedPreferences.getInstance();
-                                    // preferences.setString('email', _email);
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()),
-                                        (Route<dynamic> route) => false);
-                                    //Navigator.push(context, MaterialPageRoute(builder: (context) =>HomePage()));
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: () {},
+                          child: Text("Forgot Password"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
+                          child: RaisedButton(
+                            elevation: 5.0,
+                            onPressed: () async {
+                              try {
+                                final user =
+                                    await _auth.signInWithEmailAndPassword(
+                                        email: _email, password: _password);
+                                if (user != null) {
+                                  // SharedPreferences preferences =
+                                  //    await SharedPreferences.getInstance();
+                                  // preferences.setString('email', _email);
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                      (Route<dynamic> route) => false);
+                                  //Navigator.push(context, MaterialPageRoute(builder: (context) =>HomePage()));
 
-                                  }
-                                  Fluttertoast.showToast(
-                                      msg: "LOGIN Successful!!!",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.CENTER,
-                                      backgroundColor: Colors.green[400],
-                                      textColor: Colors.white,
-                                      timeInSecForIos: 1);
-                                } catch (e) {
-                                  var alert = AlertDialog(
-                                    content: Text('Invalid Email or Password'),
-                                  );
-                                  return showDialog(
-                                    context: context,
-                                    builder: (context) => alert,
-                                  );
                                 }
-                              },
-                              child: Text('LOGIN',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold)),
-                              color: Colors.orange,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
+                                Fluttertoast.showToast(
+                                    msg: "LOGIN Successful!!!",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    backgroundColor: Colors.green[400],
+                                    textColor: Colors.white,
+                                    timeInSecForIos: 1);
+                              } catch (e) {
+                                var alert = AlertDialog(
+                                  content: Text('Invalid Email or Password'),
+                                );
+                                return showDialog(
+                                  context: context,
+                                  builder: (context) => alert,
+                                );
+                              }
+                            },
+                            child: Text('LOGIN',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 28.0,
+                                    fontWeight: FontWeight.bold)),
+                            color: Colors.orange,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                "Don't Have An Account Yet?",
-                style: TextStyle(
-                  fontSize: 13.0,
+            ),
+            Text(
+              "Don't Have An Account Yet?",
+              style: TextStyle(
+                  fontSize: 22.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white70,
+                  color: Colors.black54),
+            ),
+            FlatButton(
+              child: Text(
+                "REGISTER HERE!",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24.0,
+                  shadows: [
+                    Shadow(
+                        // bottomLeft
+                        offset: Offset(-1.0, -1.0),
+                        color: Colors.black),
+                    Shadow(
+                        // bottomRight
+                        offset: Offset(-1.0, -1.0),
+                        color: Colors.black),
+                    Shadow(
+                        // topRight
+                        offset: Offset(-1.0, -1.0),
+                        color: Colors.black),
+                    Shadow(
+                        // topLeft
+                        offset: Offset(-1.0, -1.0),
+                        color: Colors.black26),
+                  ],
                 ),
               ),
-              FlatButton(
-                child: Text(
-                  "REGISTER HERE!",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    shadows: [
-                      Shadow(
-                          // bottomLeft
-                          offset: Offset(-1.0, -1.0),
-                          color: Colors.black),
-                      Shadow(
-                          // bottomRight
-                          offset: Offset(-1.0, -1.0),
-                          color: Colors.black),
-                      Shadow(
-                          // topRight
-                          offset: Offset(-1.0, -1.0),
-                          color: Colors.black),
-                      Shadow(
-                          // topLeft
-                          offset: Offset(-1.0, -1.0),
-                          color: Colors.black26),
-                    ],
-                  ),
-                ),
-                textColor: Colors.lightBlue,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUp()),
-                  );
-                },
-              )
-            ],
+              textColor: Colors.amber,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUp()),
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
+    return Stack(children: [
+      Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/login.png'),
+            fit: BoxFit.cover,
           ),
         ),
       ),
+      scaffold,
     ]);
   }
 }

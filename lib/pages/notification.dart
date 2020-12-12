@@ -41,17 +41,17 @@ class _NotificationsState extends State<Notifications> {
               ),
             ],
           ),
-          leading: Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: new Text(
-              "REGISTRATION",
-              style: new TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18.0,
-              ),
-            ),
-          ),
+          // leading: Padding(
+          //   padding: const EdgeInsets.all(2.0),
+          //   child: new Text(
+          //     "REGISTRATION",
+          //     style: new TextStyle(
+          //       color: Colors.white,
+          //       fontWeight: FontWeight.bold,
+          //       fontSize: 18.0,
+          //     ),
+          //   ),
+          // ),
         ),
         body: SingleChildScrollView(
           child: Container(

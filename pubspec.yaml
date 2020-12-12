@@ -37,6 +37,7 @@ dependencies:
   firebase_auth: ^0.18.3+1
   cloud_firestore: ^0.14.3+1
   fluttertoast: ^3.1.3
+  readmore: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -56,14 +57,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/downloadx.jpg
-    - assets/logo.png
+    
     - assets/logo1.png
-    - assets/login.jpeg
-    - assets/registration.jpeg
     - assets/login.png
     - assets/registration.png
-    - assets/homepage.jpg
     - assets/pose/plank.png
     - assets/pose/cobra.png
     - assets/pose/tree.png
@@ -74,9 +71,6 @@ flutter:
     - assets/slide/slide2.jpeg
     - assets/slide/slide3.jpg
     - assets/slide/slide4.png
-    - assets/slide/homepage.jpg
-    - assets/slide/homepage1.jpg
-    - assets/slide/homepage2.jpg
     - assets/slide/homepage4.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -4,11 +4,16 @@ import 'package:circular_menu/circular_menu.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
-import 'package:yoga_app/myprofile.dart';
-import 'package:yoga_app/notification.dart';
-
-import 'package:yoga_app/yoga class.dart';
+import 'package:yoga_app/pages/myprofile.dart';
+import 'package:yoga_app/pages/notification.dart';
+import 'package:readmore/readmore.dart';
+import 'package:yoga_app/pages/yoga%20class.dart';
+import 'package:yoga_app/poses/child.dart';
+import 'package:yoga_app/poses/plank.dart';
+import 'package:yoga_app/poses/tree.dart';
+import 'package:yoga_app/poses/triangle.dart';
 import 'about us.dart';
+import 'package:yoga_app/poses/cobra.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -45,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             appBar: AppBar(
-              backgroundColor: Colors.lightBlue[400],
+              backgroundColor: Colors.deepPurple[200],
               elevation: 0,
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -160,20 +165,51 @@ class _HomePageState extends State<HomePage> {
                         //         fit: BoxFit.fitHeight)),
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'A set of specific exercises, called poses, combined with specific breathing techniques and meditation principles are the building blocks of a yoga class. If a pose causes pain or proves too difficult, there are variations and modifications that can be made to help students. Props like blocks, blankets and straps — even chairs — can be used to help you get the most benefit from the poses.',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: ReadMoreText(
+                            //     'A set of specific exercises, called poses, combined with specific breathing techniques and meditation principles are the building blocks of a yoga class.If a pose causes pain or proves too difficult, there are variations and modifications that can be made to help students. Props like blocks, blankets and straps — even chairs — can be used to help you get the most benefit from the poses.',
+                            //     trimLines: 2,
+                            //     colorClickableText: Colors.deepPurple[200],
+                            //     trimMode: TrimMode.Line,
+                            //     trimCollapsedText: '...Show more',
+                            //     style: TextStyle(
+                            //       fontSize: 18.0,
+                            //       color: Colors.white,
+                            //       //fontWeight: FontWeight.bold,
+                            //       fontFamily: 'Lato',
+                            //     ),
+                            //   ),
+                            // ),
+                            //  style:TextStyle(
+                            //     fontSize: 25.0,
+                            //     color: Colors.white,
+                            //     //fontWeight: FontWeight.bold,
+                            //     fontFamily: 'Lato',
+                            //   ),
+
+                            //   ),GestureDetector(
+                            //   child: Text(
+                            //     'more',
+                            //     style: TextStyle(color: Colors.blue),
+                            //   ),
+                            //   onTap: () {
+                            //     Text(
+                            //         'If a pose causes pain or proves too difficult, there are variations and modifications that can be made to help students. Props like blocks, blankets and straps — even chairs — can be used to help you get the most benefit from the poses.');
+                            //   },
+                            // ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Child()),
+                                );
+                              },
+                              child: Image.asset('assets/pose/child.png'),
                             ),
-                            Image.asset('assets/pose/child.png'),
                             Text(
-                              'CHILD POSE',
+                              'CLASS 1',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -198,20 +234,33 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'This calming pose is a good default pause position. You can use child’s pose to rest and refocus before continuing to your next pose. It gently stretches your lower back, hips, thighs, knees and ankles and relaxes your spine, shoulders and neck.',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                            ),
-                            Image.asset('assets/pose/plank.png'),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: ReadMoreText(
+                            //     'This calming pose is a good default pause position. You can use child’s pose to rest and refocus before continuing to your next pose. It gently stretches your lower back, hips, thighs, knees and ankles and relaxes your spine, shoulders and neck.',
+                            //     trimLines: 2,
+                            //     colorClickableText: Colors.deepPurple[200],
+                            //     trimMode: TrimMode.Line,
+                            //     trimCollapsedText: '...Show more',
+                            //     style: TextStyle(
+                            //       fontSize: 18.0,
+                            //       color: Colors.white,
+                            //       //fontWeight: FontWeight.bold,
+                            //       fontFamily: 'Lato',
+                            //     ),
+                            //   ),
+                            // ),
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Plank()),
+                                  );
+                                },
+                                child: Image.asset('assets/pose/plank.png')),
                             Text(
-                              'PLANK POSE',
+                              'CLASS 2',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -236,20 +285,33 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'A commonly seen exercise, plank helps build strength in the core, shoulders, arms and legs.',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                            ),
-                            Image.asset('assets/pose/tree.png'),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: ReadMoreText(
+                            //     'A commonly seen exercise, plank helps build strength in the core, shoulders, arms and legs.',
+                            //     trimLines: 2,
+                            //     colorClickableText: Colors.deepPurple[200],
+                            //     trimMode: TrimMode.Line,
+                            //     trimCollapsedText: '...Show more',
+                            //     style: TextStyle(
+                            //       fontSize: 18.0,
+                            //       color: Colors.white,
+                            //       // fontWeight: FontWeight.bold,
+                            //       fontFamily: 'Lato',
+                            //     ),
+                            //   ),
+                            // ),
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Tree()),
+                                  );
+                                },
+                                child: Image.asset('assets/pose/tree.png')),
                             Text(
-                              'TREE POSE',
+                              'CLASS 3',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -274,20 +336,33 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Beyond helping improve your balance, it can also strengthen your core, ankles, calves, thighs and spine.',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                            ),
-                            Image.asset('assets/pose/cobra.png'),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: ReadMoreText(
+                            //     'Beyond helping improve your balance, it can also strengthen your core, ankles, calves, thighs and spine.',
+                            //     trimLines: 2,
+                            //     colorClickableText: Colors.deepPurple[200],
+                            //     trimMode: TrimMode.Line,
+                            //     trimCollapsedText: '...Show more',
+                            //     style: TextStyle(
+                            //       fontSize: 18.0,
+                            //       color: Colors.white,
+                            //       // fontWeight: FontWeight.bold,
+                            //       fontFamily: 'Lato',
+                            //     ),
+                            //   ),
+                            // ),
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Cobra()),
+                                  );
+                                },
+                                child: Image.asset('assets/pose/cobra.png')),
                             Text(
-                              'COBRA POSE',
+                              'CLASS 4',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -312,20 +387,33 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'This back-bending pose can help strengthen the back muscles, increase spinal flexibility and stretches the chest, shoulders and abdomen.',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                            ),
-                            Image.asset('assets/pose/triangle.png'),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: ReadMoreText(
+                            //     'This back-bending pose can help strengthen the back muscles, increase spinal flexibility and stretches the chest, shoulders and abdomen.',
+                            //     trimLines: 2,
+                            //     colorClickableText: Colors.deepPurple[200],
+                            //     trimMode: TrimMode.Line,
+                            //     trimCollapsedText: '...Show more',
+                            //     style: TextStyle(
+                            //       fontSize: 18.0,
+                            //       color: Colors.white,
+                            //       //fontWeight: FontWeight.bold,
+                            //       fontFamily: 'Lato',
+                            //     ),
+                            //   ),
+                            // ),
+                            FlatButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Triangle()),
+                                  );
+                                },
+                                child: Image.asset('assets/pose/triangle.png')),
                             Text(
-                              'TRIANGLE POSE',
+                              'CLASS 5',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -350,17 +438,22 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Triangle, which is a part of many yoga sequences helps build strength in the legs and stretches the hips, spine, chest, shoulders, groins, hamstrings and calves. It can also help increase mobility in the hips and neck.',
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child: ReadMoreText(
+                            //     'Triangle, which is a part of many yoga sequences helps build strength in the legs and stretches the hips, spine, chest, shoulders, groins, hamstrings and calves. It can also help increase mobility in the hips and neck.',
+                            //     trimLines: 2,
+                            //     colorClickableText: Colors.deepPurple[200],
+                            //     trimMode: TrimMode.Line,
+                            //     trimCollapsedText: '...Show more',
+                            //     style: TextStyle(
+                            //       fontSize: 18.0,
+                            //       color: Colors.white,
+                            //       //fontWeight: FontWeight.bold,
+                            //       fontFamily: 'Lato',
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

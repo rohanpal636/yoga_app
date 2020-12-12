@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yoga_app/auth/login.dart';
-import 'package:yoga_app/homepage.dart';
+import 'package:yoga_app/pages/homepage.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -42,19 +42,10 @@ class _SignUpState extends State<SignUp> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            backgroundColor: Colors.lightBlueAccent.shade700,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    "assets/logo1.png",
-                    fit: BoxFit.contain,
-                    height: 80,
-                  ),
-                ),
-              ],
+            backgroundColor: Colors.deepPurple[200],
+            title: new Text(
+              "REGISTRATION",
+              style: new TextStyle(color: Colors.white),
             ),
             leading: new IconButton(
               icon: new Icon(Icons.arrow_back),
@@ -62,18 +53,39 @@ class _SignUpState extends State<SignUp> {
                 Navigator.pop(context);
               },
             ),
-            // leading: Padding(
-            //   padding: const EdgeInsets.all(2.0),
-            //   child: new Text(
-            //     "REGISTRATION",
-            //     style: new TextStyle(
-            //       color: Colors.white,
-            //       fontWeight: FontWeight.bold,
-            //       fontSize: 18.0,
-            //     ),
-            //   ),
-            // ),
           ),
+          // backgroundColor: Colors.deepPurple[200],
+          // title: Row(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: Image.asset(
+          //         "assets/logo1.png",
+          //         fit: BoxFit.contain,
+          //         height: 80,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // leading: new IconButton(
+          //   icon: new Icon(Icons.arrow_back),
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
+          // leading: Padding(
+          //   padding: const EdgeInsets.all(2.0),
+          //   child: new Text(
+          //     "REGISTRATION",
+          //     style: new TextStyle(
+          //       color: Colors.white,
+          //       fontWeight: FontWeight.bold,
+          //       fontSize: 18.0,
+          //     ),
+          //   ),
+          // ),
+          //),
           body: SingleChildScrollView(
             child: Container(
               // constraints: BoxConstraints.expand(width: 400.0, height: 800.0),
@@ -103,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                           labelText: 'First Name',
                           prefixIcon: Icon(
                             Icons.account_circle,
-                            color: Colors.amber[400],
+                            color: Colors.deepPurple,
                           ),
                           /* border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue),
@@ -130,7 +142,7 @@ class _SignUpState extends State<SignUp> {
                           labelText: 'Last Name',
                           prefixIcon: Icon(
                             Icons.account_circle,
-                            color: Colors.amber[400],
+                            color: Colors.deepPurple,
                           ),
                           /* border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue),
@@ -178,7 +190,7 @@ class _SignUpState extends State<SignUp> {
                           labelText: 'Email',
                           prefixIcon: Icon(
                             Icons.email,
-                            color: Colors.amber[400],
+                            color: Colors.deepPurple,
                           ), /*border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.all(Radius.circular(
@@ -286,7 +298,7 @@ class _SignUpState extends State<SignUp> {
                           labelText: 'Password',
                           prefixIcon: Icon(
                             Icons.lock,
-                            color: Colors.amber[400],
+                            color: Colors.deepPurple,
                           ),
                           /* border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue),
@@ -330,7 +342,7 @@ class _SignUpState extends State<SignUp> {
                           labelText: 'Confirm Password',
                           prefixIcon: Icon(
                             Icons.lock,
-                            color: Colors.amber[400],
+                            color: Colors.deepPurple,
                           ),
                           /* border: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.blue),
@@ -399,16 +411,16 @@ class _SignUpState extends State<SignUp> {
                               fontWeight: FontWeight.bold, fontSize: 25.0),
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
                       ),
                     ),
                     Text(
                       "Already have an account!",
                       style: TextStyle(
-                        fontSize: 13.0,
+                        fontSize: 22.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white70,
+                        color: Colors.black54,
                       ),
                     ),
                     Padding(
@@ -418,7 +430,7 @@ class _SignUpState extends State<SignUp> {
                           "LOGIN HERE!",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                            fontSize: 24.0,
                             shadows: [
                               Shadow(
                                   // bottomLeft
