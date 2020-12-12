@@ -1,52 +1,14 @@
-// import 'package:flutter/material.dart';
-
-// class YogaClass extends StatefulWidget {
-//   @override
-//   _YogaClassState createState() => _YogaClassState();
-// }
-
-// class _YogaClassState extends State<YogaClass> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Builder(
-//         builder: (context) => Stack(children: [
-//           Container(
-//             constraints: BoxConstraints.expand(width: 500.0, height: 1200.0),
-//             decoration: BoxDecoration(
-//               image: DecorationImage(
-//                 image: AssetImage('assets/slide/homepage4.jpg'),
-//                 fit: BoxFit.cover,
-//               ),
-//             ),
-//           ),
-//           Scaffold(
-//             backgroundColor: Colors.transparent,
-//             appBar: AppBar(
-//               title: new Text(
-//                 "YOGA CLASS",
-//                 style: new TextStyle(color: Colors.white),
-//               ),
-//               leading: new IconButton(
-//                 icon: new Icon(Icons.arrow_back),
-//                 onPressed: () {
-//                   Navigator.pop(context);
-//                 },
-//               ),
-//             ),
-//           ),
-//         ]),
-//       ),
-//     );
-//   }
-// }
 //import 'dart:html';
-
+// import 'dart:async';
+// // ignore: unused_import
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yoga_app/poses/addclass.dart';
+
 // import 'file:///C:/Users/user/AndroidStudioProjects/yoga_app/home/login.dart';
 // import 'package:yoga_app/profile.dart';
 
@@ -57,18 +19,44 @@ class YogaClass extends StatefulWidget {
 
 class _YogaClassState extends State<YogaClass> {
   bool vis;
+  var subscription;
   //bool isLoggedIn;
   QuerySnapshot data;
   DocumentSnapshot userdata;
   QuerySnapshot data1;
   DocumentSnapshot userdata1;
+  getSubscription(uid) async {
+    var subscriptiondata = await FirebaseFirestore.instance
+        .collection('Subscription')
+        .doc(uid)
+        .get();
+    if (subscriptiondata.data() == null) {
+      setState(() {
+        subscription = [];
+      });
+    } else {
+      setState(() {
+        subscription = subscriptiondata.data().entries.toList();
+      });
+    }
+  }
+
+  // ignore: missing_return
   getClass() async {
+    // var response = await http.get(
+    //     Uri.encodeFull("https://yogaapp-b5cad.firebaseio.com"),
     data1 = await FirebaseFirestore.instance.collection('yoga_class').get();
-    // ignore: unused_element
     setState(() {
+      // data1 = json.decode(response.body);
       data = data1;
+      print(data.docs[0].data().toString());
     });
   }
+  // ignore: unused_element
+  //   setState(() {
+
+  //   });
+  // }
 
   getUserdata(uid) async {
     userdata1 =
@@ -80,12 +68,15 @@ class _YogaClassState extends State<YogaClass> {
   }
 
   @override
+  // ignore: unused_element
   void initState() {
     super.initState();
-    getClass();
+    this.getClass();
+
     User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       getUserdata(user.uid);
+      getSubscription(user.uid);
     } else {
       userdata = null;
     }
@@ -132,18 +123,54 @@ class _YogaClassState extends State<YogaClass> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  (index + 1).toString() +
-                                      data.docs[index].data().toString(),
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                  ),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      (index + 1).toString() +
+                                          ' Batch 1 ' +
+                                          data.docs[index].data()['Batch 1'],
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               userdata != null &&
                                       userdata['position'] == 'admin'
-                                  ? Icon(Icons.delete)
+                                  ? ButtonBar(
+                                      children: <Widget>[
+                                        FlatButton(
+                                          onPressed: () {},
+                                          child: Icon(
+                                            Icons.edit,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        FlatButton(
+                                          onPressed: () async {
+                                            await FirebaseFirestore.instance
+                                                // ignore: missing_return
+                                                .runTransaction((Transaction
+                                                    myTransaction) {
+                                              // ignore: await_only_futures
+                                              myTransaction.delete(
+                                                  data.docs[index].reference);
+                                            });
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        YogaClass()));
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      ],
+                                    )
                                   : Text(''),
                               userdata != null &&
                                       userdata['position'] != 'admin'
@@ -173,7 +200,7 @@ class _YogaClassState extends State<YogaClass> {
               child: Icon(Icons.add),
               backgroundColor: Colors.orange,
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => AddClass()),
                 );
