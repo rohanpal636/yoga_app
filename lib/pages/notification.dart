@@ -28,6 +28,7 @@ class _NotificationsState extends State<Notifications> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.deepPurple[200],
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

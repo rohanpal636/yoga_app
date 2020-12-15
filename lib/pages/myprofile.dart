@@ -32,6 +32,7 @@ class _MyProfileState extends State<MyProfile> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.deepPurple[200],
           title: new Text(
             "MY PROFILE",
             style: new TextStyle(color: Colors.white),
@@ -48,8 +49,7 @@ class _MyProfileState extends State<MyProfile> {
             //constraints: BoxConstraints.expand(width: 395.0, height: 395.0),
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/homepage.jpg"),
-                    fit: BoxFit.cover)),
+                    image: AssetImage("assets/login.png"), fit: BoxFit.cover)),
             child: SizedBox.expand(
               child: Column(
                 children: <Widget>[
@@ -98,40 +98,40 @@ class _MyProfileState extends State<MyProfile> {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(builder: (context) => YogaApp()),
                           (Route<dynamic> route) => false);
-                      /* return showDialog(
-                          context: context,
-                          builder: (context) => new AlertDialog(
-                            title: new Text('Are you sure?',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 26.0,
-                                    fontWeight: FontWeight.bold)),
-                            content: new Text('Do you want to Log Out?',
-                                style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 17.5,
-                                )),
-                            actions: <Widget>[
-                              new GestureDetector(
-                                  onTap: () {},
-                                  child: Text("NO",
+                      return showDialog(
+                            context: context,
+                            builder: (context) => new AlertDialog(
+                              title: new Text('Are you sure?',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 26.0,
+                                      fontWeight: FontWeight.bold)),
+                              content: new Text('Do you want to Log Out?',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 17.5,
+                                  )),
+                              actions: <Widget>[
+                                new GestureDetector(
+                                    onTap: () {},
+                                    child: Text("NO",
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 19.0,
+                                            fontWeight: FontWeight.bold))),
+                                SizedBox(height: 16),
+                                new GestureDetector(
+                                  onTap: () => Navigator.pop(context),
+                                  child: Text("YES",
                                       style: TextStyle(
-                                          color: Colors.red,
+                                          color: Colors.green,
                                           fontSize: 19.0,
-                                          fontWeight: FontWeight.bold))),
-                              SizedBox(height: 16),
-                              new GestureDetector(
-                                onTap: () => Navigator.pop(context),
-                                child: Text("YES",
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 19.0,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                            ],
-                          ),
-                        ) ??
-                        false;*/
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ],
+                            ),
+                          ) ??
+                          false;
                     },
                     child: const Text('LOGOUT'),
                   ),

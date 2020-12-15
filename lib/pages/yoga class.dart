@@ -7,8 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yoga_app/poses/addclass.dart';
-
+import 'package:yoga_app/poses/edit.dart';
 // import 'file:///C:/Users/user/AndroidStudioProjects/yoga_app/home/login.dart';
 // import 'package:yoga_app/profile.dart';
 
@@ -36,7 +37,8 @@ class _YogaClassState extends State<YogaClass> {
       });
     } else {
       setState(() {
-        subscription = subscriptiondata.data().entries.toList();
+        subscription = subscriptiondata.data().keys.toList();
+        // print(subscription);
       });
     }
   }
@@ -49,7 +51,7 @@ class _YogaClassState extends State<YogaClass> {
     setState(() {
       // data1 = json.decode(response.body);
       data = data1;
-      print(data.docs[0].data().toString());
+      //print(data.docs[0].data());
     });
   }
   // ignore: unused_element
@@ -67,11 +69,24 @@ class _YogaClassState extends State<YogaClass> {
     });
   }
 
+  // @override
+  // // ignore: unused_element
+  // void initState() {
+  //   super.initState();
+  // getClass();
+
+  //   User user = FirebaseAuth.instance.currentUser;
+  //   if (user != null) {
+  //     getUserdata(user.uid);
+  //     getSubscription(user.uid);
+  //   } else {
+  //     userdata = null;
+  //   }
+  // }
+
   @override
-  // ignore: unused_element
-  void initState() {
-    super.initState();
-    this.getClass();
+  Widget build(BuildContext context) {
+    getClass();
 
     User user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -80,10 +95,6 @@ class _YogaClassState extends State<YogaClass> {
     } else {
       userdata = null;
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     if (userdata != null && userdata['position'] == 'admin') {
       setState(() {
         vis = true;
@@ -127,8 +138,26 @@ class _YogaClassState extends State<YogaClass> {
                                   children: [
                                     Text(
                                       (index + 1).toString() +
-                                          ' Batch 1 ' +
-                                          data.docs[index].data()['Batch 1'],
+                                          '*' +
+                                          ''
+                                              ' Batch 1 : ' +
+                                          ' ' +
+                                          data.docs[index].data()['Batch 1'] +
+                                          '\n' +
+                                          ' ' +
+                                          ' Batch 2 : ' +
+                                          ' ' +
+                                          data.docs[index].data()['Batch 2'] +
+                                          '\n' +
+                                          ' ' +
+                                          ' Class : ' +
+                                          ' ' +
+                                          data.docs[index].data()['Class'] +
+                                          '\n' +
+                                          ' ' +
+                                          ' Fees : ' +
+                                          ' ' +
+                                          data.docs[index].data()['Fees'],
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: Colors.white,
@@ -142,7 +171,16 @@ class _YogaClassState extends State<YogaClass> {
                                   ? ButtonBar(
                                       children: <Widget>[
                                         FlatButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Edit(
+                                                          uid: userdata.id,
+                                                          data: data.docs[index]
+                                                              .data(),
+                                                        )));
+                                          },
                                           child: Icon(
                                             Icons.edit,
                                             color: Colors.white,
@@ -150,19 +188,45 @@ class _YogaClassState extends State<YogaClass> {
                                         ),
                                         FlatButton(
                                           onPressed: () async {
-                                            await FirebaseFirestore.instance
-                                                // ignore: missing_return
-                                                .runTransaction((Transaction
-                                                    myTransaction) {
-                                              // ignore: await_only_futures
-                                              myTransaction.delete(
-                                                  data.docs[index].reference);
-                                            });
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        YogaClass()));
+                                            showDialog(
+                                              context: context,
+                                              builder: (ctx) => AlertDialog(
+                                                content: Text("Are You Sure?"),
+                                                actions: <Widget>[
+                                                  ButtonBar(
+                                                    children: [
+                                                      FlatButton(
+                                                        onPressed: () async {
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              // ignore: missing_return
+                                                              .runTransaction(
+                                                                  // ignore: missing_return
+                                                                  (Transaction
+                                                                      myTransaction) {
+                                                            // ignore: await_only_futures
+                                                            myTransaction
+                                                                .delete(data
+                                                                    .docs[index]
+                                                                    .reference);
+                                                          });
+                                                          Navigator.of(ctx)
+                                                              .pop();
+                                                        },
+                                                        child: Text("Yes"),
+                                                      ),
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.of(ctx)
+                                                              .pop();
+                                                        },
+                                                        child: Text("No"),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
                                           },
                                           child: Icon(
                                             Icons.delete,
@@ -175,10 +239,109 @@ class _YogaClassState extends State<YogaClass> {
                               userdata != null &&
                                       userdata['position'] != 'admin'
                                   ? RaisedButton(
-                                      color: Colors.redAccent[200],
-                                      onPressed: () {},
+                                      color: !subscription
+                                              .contains(data.docs[index].id)
+                                          ? Colors.green[200]
+                                          : Colors.redAccent[200],
+                                      onPressed: () async {
+                                        // showDialog(
+                                        //     context: context,
+                                        //     builder: (context) =>
+                                        //         MyForm(onSubmit: onSubmit));
+                                        var uid = data.docs[index].id;
+                                        var path = FirebaseFirestore.instance
+                                            .collection('Subscription')
+                                            .doc(userdata.id);
+                                        showDialog(
+                                          context: context,
+                                          builder: (ctx) => AlertDialog(
+                                            content: Text("Want To Continue?"),
+                                            actions: <Widget>[
+                                              ButtonBar(
+                                                children: [
+                                                  FlatButton(
+                                                      child: Text("Yes"),
+                                                      onPressed: () async {
+                                                        if (!subscription
+                                                            .contains(data
+                                                                .docs[index]
+                                                                .id)) {
+                                                          var reference =
+                                                              await path.get();
+                                                          if (reference
+                                                              .exists) {
+                                                            await path.update(
+                                                                {'$uid': null});
+                                                          } else {
+                                                            await path.set(
+                                                                {'$uid': null});
+                                                          }
+                                                          setState(() {
+                                                            subscription
+                                                                .add(uid);
+                                                          });
+                                                          Navigator.of(ctx)
+                                                              .pop();
+                                                          Fluttertoast.showToast(
+                                                              msg:
+                                                                  "Subscribed Successfully",
+                                                              toastLength: Toast
+                                                                  .LENGTH_SHORT,
+                                                              gravity:
+                                                                  ToastGravity
+                                                                      .CENTER,
+                                                              backgroundColor:
+                                                                  Colors.green[
+                                                                      400],
+                                                              textColor:
+                                                                  Colors.white,
+                                                              timeInSecForIos:
+                                                                  1);
+                                                        } else {
+                                                          await path.update({
+                                                            '$uid': FieldValue
+                                                                .delete()
+                                                          });
+                                                          setState(() {
+                                                            subscription
+                                                                .remove(uid);
+                                                          });
+                                                          Navigator.of(ctx)
+                                                              .pop();
+                                                          Fluttertoast.showToast(
+                                                              msg:
+                                                                  "Unsubscribed",
+                                                              toastLength: Toast
+                                                                  .LENGTH_SHORT,
+                                                              gravity:
+                                                                  ToastGravity
+                                                                      .CENTER,
+                                                              backgroundColor:
+                                                                  Colors.orange[
+                                                                      400],
+                                                              textColor:
+                                                                  Colors.white,
+                                                              timeInSecForIos:
+                                                                  1);
+                                                        }
+                                                      }),
+                                                  FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.of(ctx).pop();
+                                                    },
+                                                    child: Text("No"),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
                                       child: Text(
-                                        'Subscribe',
+                                        !subscription
+                                                .contains(data.docs[index].id)
+                                            ? 'Subscribe'
+                                            : 'Unsubscribe',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 15.0),
@@ -200,7 +363,7 @@ class _YogaClassState extends State<YogaClass> {
               child: Icon(Icons.add),
               backgroundColor: Colors.orange,
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => AddClass()),
                 );
@@ -212,3 +375,236 @@ class _YogaClassState extends State<YogaClass> {
     );
   }
 }
+
+// typedef void MyFormCallback(String result);
+
+// class MyForm extends StatefulWidget {
+//   final MyFormCallback onSubmit;
+
+//   MyForm({this.onSubmit});
+
+//   @override
+//   _MyFormState createState() => _MyFormState();
+// }
+
+// class _MyFormState extends State<MyForm> {
+//   String value;
+//   bool vis;
+//   var subscription;
+//   //bool isLoggedIn;
+//   QuerySnapshot data;
+//   DocumentSnapshot userdata;
+//   QuerySnapshot data1;
+//   DocumentSnapshot userdata1;
+//   @override
+//   Widget build(BuildContext context) {
+//     return data != null
+//               ? ListView.builder(
+//                   itemCount: data.size,
+//                   itemBuilder: (context, index) {
+//                     SimpleDialog(
+//       title: Text("Choose Batch"),
+//       children: <Widget>[
+//         Radio(
+//           groupValue: value,
+//           value: "Batch 1",
+//           onChanged: (value){
+//             var uid = data.docs[index].id;
+//                                         var path = FirebaseFirestore.instance
+//                                             .collection('Subscription')
+//                                             .doc(userdata.id);
+//                                         showDialog(
+//                                           context: context,
+//                                           builder: (ctx) => AlertDialog(
+//                                             content: Text("Want To Continue?"),
+//                                             actions: <Widget>[
+//                                               ButtonBar(
+//                                                 children: [
+//                                                   FlatButton(
+//                                                       child: Text("Yes"),
+//                                                       onPressed: () async {
+//                                                         if (!subscription
+//                                                             .contains(data
+//                                                                 .docs[index]
+//                                                                 .id)) {
+//                                                           var reference =
+//                                                               await path.get();
+//                                                           if (reference
+//                                                               .exists) {
+//                                                             await path.update(
+//                                                                 {'$uid': null});
+//                                                           } else {
+//                                                             await path.set(
+//                                                                 {'$uid': null});
+//                                                           }
+//                                                           setState(() {
+//                                                             subscription
+//                                                                 .add(uid);
+//                                                           });
+//                                                           Navigator.of(ctx)
+//                                                               .pop();
+//                                                           Fluttertoast.showToast(
+//                                                               msg:
+//                                                                   "Subscribed Successfully",
+//                                                               toastLength: Toast
+//                                                                   .LENGTH_SHORT,
+//                                                               gravity:
+//                                                                   ToastGravity
+//                                                                       .CENTER,
+//                                                               backgroundColor:
+//                                                                   Colors.green[
+//                                                                       400],
+//                                                               textColor:
+//                                                                   Colors.white,
+//                                                               timeInSecForIos:
+//                                                                   1);
+//                                                         } else {
+//                                                           await path.update({
+//                                                             '$uid': FieldValue
+//                                                                 .delete()
+//                                                           });
+//                                                           setState(() {
+//                                                             subscription
+//                                                                 .remove(uid);
+//                                                           });
+//                                                           Navigator.of(ctx)
+//                                                               .pop();
+//                                                           Fluttertoast.showToast(
+//                                                               msg:
+//                                                                   "Unsubscribed",
+//                                                               toastLength: Toast
+//                                                                   .LENGTH_SHORT,
+//                                                               gravity:
+//                                                                   ToastGravity
+//                                                                       .CENTER,
+//                                                               backgroundColor:
+//                                                                   Colors.orange[
+//                                                                       400],
+//                                                               textColor:
+//                                                                   Colors.white,
+//                                                               timeInSecForIos:
+//                                                                   1);
+//                                                         }
+//                                                       }),
+//                                                   FlatButton(
+//                                                     onPressed: () {
+//                                                       Navigator.of(ctx).pop();
+//                                                     },
+//                                                     child: Text("No"),
+//                                                   ),
+//                                                 ],
+//                                               ),
+//                                             ],
+//                                           ),
+//                                         );
+//            setState(() => this.value = value);
+//           },
+//         ),
+//         Radio(
+//           value: "Batch 2",
+//           groupValue: value,
+//           onChanged: (value){
+//          var uid = data.docs[index].id;
+//                                         var path = FirebaseFirestore.instance
+//                                             .collection('Subscription')
+//                                             .doc(userdata.id);
+//                                         showDialog(
+//                                           context: context,
+//                                           builder: (ctx) => AlertDialog(
+//                                             content: Text("Want To Continue?"),
+//                                             actions: <Widget>[
+//                                               ButtonBar(
+//                                                 children: [
+//                                                   FlatButton(
+//                                                       child: Text("Yes"),
+//                                                       onPressed: () async {
+//                                                         if (!subscription
+//                                                             .contains(data
+//                                                                 .docs[index]
+//                                                                 .id)) {
+//                                                           var reference =
+//                                                               await path.get();
+//                                                           if (reference
+//                                                               .exists) {
+//                                                             await path.update(
+//                                                                 {'$uid': null});
+//                                                           } else {
+//                                                             await path.set(
+//                                                                 {'$uid': null});
+//                                                           }
+//                                                           setState(() {
+//                                                             subscription
+//                                                                 .add(uid);
+//                                                           });
+//                                                           Navigator.of(ctx)
+//                                                               .pop();
+//                                                           Fluttertoast.showToast(
+//                                                               msg:
+//                                                                   "Subscribed Successfully",
+//                                                               toastLength: Toast
+//                                                                   .LENGTH_SHORT,
+//                                                               gravity:
+//                                                                   ToastGravity
+//                                                                       .CENTER,
+//                                                               backgroundColor:
+//                                                                   Colors.green[
+//                                                                       400],
+//                                                               textColor:
+//                                                                   Colors.white,
+//                                                               timeInSecForIos:
+//                                                                   1);
+//                                                         } else {
+//                                                           await path.update({
+//                                                             '$uid': FieldValue
+//                                                                 .delete()
+//                                                           });
+//                                                           setState(() {
+//                                                             subscription
+//                                                                 .remove(uid);
+//                                                           });
+//                                                           Navigator.of(ctx)
+//                                                               .pop();
+//                                                           Fluttertoast.showToast(
+//                                                               msg:
+//                                                                   "Unsubscribed",
+//                                                               toastLength: Toast
+//                                                                   .LENGTH_SHORT,
+//                                                               gravity:
+//                                                                   ToastGravity
+//                                                                       .CENTER,
+//                                                               backgroundColor:
+//                                                                   Colors.orange[
+//                                                                       400],
+//                                                               textColor:
+//                                                                   Colors.white,
+//                                                               timeInSecForIos:
+//                                                                   1);
+//                                                         }
+//                                                       }),
+//                                                   FlatButton(
+//                                                     onPressed: () {
+//                                                       Navigator.of(ctx).pop();
+//                                                     },
+//                                                     child: Text("No"),
+//                                                   ),
+//                                                 ],
+//                                               ),
+//                                             ],
+//                                           ),
+//                                         );
+//            setState(() => this.value = value);
+//           },
+//         ),
+//         FlatButton(
+//           onPressed: () {
+//             Navigator.pop(context);
+//             widget.onSubmit(value);
+//           },
+//           child: new Text(" "),
+//         )
+//       ],
+//     );
+//                   }
+//               )
+//   }
+// }
