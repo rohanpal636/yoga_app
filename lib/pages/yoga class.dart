@@ -284,7 +284,7 @@ class _YogaClassState extends State<YogaClass> {
                                             .doc(userdata.id);
                                         showDialog(
                                           context: context,
-                                          builder: (ctx) => AlertDialog(
+                                          builder: (context) => AlertDialog(
                                             content: Text("Want To Continue?"),
                                             actions: <Widget>[
                                               ButtonBar(
@@ -310,7 +310,7 @@ class _YogaClassState extends State<YogaClass> {
                                                             subscription
                                                                 .add(uid);
                                                           });
-                                                          Navigator.of(ctx)
+                                                          Navigator.of(context)
                                                               .pop();
                                                           Fluttertoast.showToast(
                                                               msg:
@@ -336,7 +336,7 @@ class _YogaClassState extends State<YogaClass> {
                                                             subscription
                                                                 .remove(uid);
                                                           });
-                                                          Navigator.of(ctx)
+                                                          Navigator.of(context)
                                                               .pop();
                                                           Fluttertoast.showToast(
                                                               msg:
@@ -357,7 +357,8 @@ class _YogaClassState extends State<YogaClass> {
                                                       }),
                                                   FlatButton(
                                                     onPressed: () {
-                                                      Navigator.of(ctx).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: Text("No"),
                                                   ),
