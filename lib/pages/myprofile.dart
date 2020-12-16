@@ -109,7 +109,9 @@ class _MyProfileState extends State<MyProfile> {
                                   )),
                               actions: <Widget>[
                                 new GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
                                     child: Text("NO",
                                         style: TextStyle(
                                             color: Colors.red,

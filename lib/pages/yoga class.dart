@@ -208,7 +208,11 @@ class _YogaClassState extends State<YogaClass> {
                                                         )),
                                                     actions: <Widget>[
                                                       new GestureDetector(
-                                                          onTap: () {},
+                                                          onTap: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
                                                           child: Text("NO",
                                                               style: TextStyle(
                                                                   color: Colors
