@@ -94,10 +94,6 @@ class _MyProfileState extends State<MyProfile> {
                   const SizedBox(height: 16.0),
                   RaisedButton(
                     onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => YogaApp()),
-                          (Route<dynamic> route) => false);
                       return showDialog(
                             context: context,
                             builder: (context) => new AlertDialog(
@@ -121,7 +117,13 @@ class _MyProfileState extends State<MyProfile> {
                                             fontWeight: FontWeight.bold))),
                                 SizedBox(height: 16),
                                 new GestureDetector(
-                                  onTap: () => Navigator.pop(context),
+                                  onTap: () {
+                                    FirebaseAuth.instance.signOut();
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => YogaApp()),
+                                        (Route<dynamic> route) => false);
+                                  },
                                   child: Text("YES",
                                       style: TextStyle(
                                           color: Colors.green,

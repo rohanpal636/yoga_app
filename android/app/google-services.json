@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "1089901048403",
-    "firebase_url": "https://flashchat-5a244.firebaseio.com",
-    "project_id": "flashchat-5a244",
-    "storage_bucket": "flashchat-5a244.appspot.com"
+    "project_number": "258611800755",
+    "project_id": "yoga-app-69f15",
+    "storage_bucket": "yoga-app-69f15.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1089901048403:android:d1a6f44c193b001bbecca6",
+        "mobilesdk_app_id": "1:258611800755:android:bc239bcbc5f85e469cdec6",
         "android_client_info": {
-          "package_name": "rohanpal636.yoga_app"
+          "package_name": "com.example.yoga_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1089901048403-df3hhud396hn3egbq1d4rba6c2dhoang.apps.googleusercontent.com",
+          "client_id": "258611800755-kuqdhs1pvju7a9nqg5vc717q81o9pi3h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCySSS5IEYzbGZXhKg9w6TnHiVW36gM3DQ"
+          "current_key": "AIzaSyBjQcKhkONE8fIJZNHkWz5S6klvLjvgpnU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1089901048403-df3hhud396hn3egbq1d4rba6c2dhoang.apps.googleusercontent.com",
+              "client_id": "258611800755-kuqdhs1pvju7a9nqg5vc717q81o9pi3h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

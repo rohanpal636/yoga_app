@@ -188,20 +188,43 @@ class _YogaClassState extends State<YogaClass> {
                                         ),
                                         FlatButton(
                                           onPressed: () async {
-                                            showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                content: Text("Are You Sure?"),
-                                                actions: <Widget>[
-                                                  ButtonBar(
-                                                    children: [
-                                                      FlatButton(
-                                                        onPressed: () async {
+                                            return showDialog(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      new AlertDialog(
+                                                    title: new Text(
+                                                        'Are you sure?',
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 26.0,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                    content: new Text(
+                                                        'Do you want to Delete?',
+                                                        style: TextStyle(
+                                                          color: Colors.blue,
+                                                          fontSize: 17.5,
+                                                        )),
+                                                    actions: <Widget>[
+                                                      new GestureDetector(
+                                                          onTap: () {},
+                                                          child: Text("NO",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .red,
+                                                                  fontSize:
+                                                                      19.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold))),
+                                                      SizedBox(height: 16),
+                                                      new GestureDetector(
+                                                        onTap: () async {
                                                           await FirebaseFirestore
                                                               .instance
                                                               // ignore: missing_return
                                                               .runTransaction(
-                                                                  // ignore: missing_return
                                                                   (Transaction
                                                                       myTransaction) {
                                                             // ignore: await_only_futures
@@ -210,23 +233,26 @@ class _YogaClassState extends State<YogaClass> {
                                                                     .docs[index]
                                                                     .reference);
                                                           });
-                                                          Navigator.of(ctx)
-                                                              .pop();
+                                                          Navigator.pushReplacement(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          YogaClass()));
                                                         },
-                                                        child: Text("Yes"),
-                                                      ),
-                                                      FlatButton(
-                                                        onPressed: () {
-                                                          Navigator.of(ctx)
-                                                              .pop();
-                                                        },
-                                                        child: Text("No"),
+                                                        child: Text("YES",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .green,
+                                                                fontSize: 19.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
                                                       ),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                            );
+                                                ) ??
+                                                false;
                                           },
                                           child: Icon(
                                             Icons.delete,

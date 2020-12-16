@@ -6,7 +6,7 @@ import 'package:circular_menu/circular_menu.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:yoga_app/pages/myprofile.dart';
 import 'package:yoga_app/pages/notification.dart';
-import 'package:readmore/readmore.dart';
+// import 'package:readmore/readmore.dart';
 import 'package:yoga_app/pages/yoga%20class.dart';
 import 'package:yoga_app/poses/child.dart';
 import 'package:yoga_app/poses/plank.dart';

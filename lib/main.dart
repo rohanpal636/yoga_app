@@ -5,7 +5,7 @@ import 'package:circular_menu/circular_menu.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:readmore/readmore.dart';
+// import 'package:readmore/readmore.dart';
 import 'package:yoga_app/pages/homepage.dart';
 import 'package:yoga_app/auth/registration.dart';
 import 'package:yoga_app/auth/login.dart';
