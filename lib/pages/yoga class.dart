@@ -187,7 +187,7 @@ class _YogaClassState extends State<YogaClass> {
                                           ),
                                         ),
                                         FlatButton(
-                                          onPressed: () async {
+                                          onPressed: () {
                                             return showDialog(
                                                   context: context,
                                                   builder: (context) =>
